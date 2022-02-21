@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:morse_code_flashlight/view/decode_view.dart/decode_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeView extends StatefulWidget {
@@ -31,7 +32,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: _appBar(),
+      drawer: _drawer(),
       body: Column(
         children: <Widget>[
           Expanded(flex: 1, child: _inputText()),
@@ -47,7 +49,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  AppBar appBar() {
+  AppBar _appBar() {
     return AppBar(
       title: const Text('Morse Code'),
       centerTitle: true,
@@ -77,6 +79,27 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+  Drawer _drawer() {
+    return Drawer(
+      child: SafeArea(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            ListTile(
+              title: const Text('Encode'),
+              onTap: () => Navigator.pop(context),
+            ),
+            ListTile(
+              title: const Text('Decode'),
+              onTap: () => Navigator.popAndPushNamed(context, DecodeView.route),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _inputText() {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -84,6 +107,8 @@ class _HomeViewState extends State<HomeView> {
         keyboardType: TextInputType.multiline,
         minLines: 20,
         maxLines: null,
+        toolbarOptions: const ToolbarOptions(
+            copy: true, selectAll: true, cut: true, paste: true),
         decoration: InputDecoration(
           filled: true,
           isDense: true,
@@ -106,18 +131,20 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _flashLight() {
     return Container(
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.all(30),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: GestureDetector(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(100),
           onTap: () {},
-          child: Image(
-              image: darkTheme
-                  ? const AssetImage('assets/images/flashlight_white.png')
-                  : const AssetImage('assets/images/flashlight_black.png')),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            child: Image(
+                image: darkTheme
+                    ? const AssetImage('assets/images/flashlight_white.png')
+                    : const AssetImage('assets/images/flashlight_black.png')),
+          ),
         ),
       ),
     );

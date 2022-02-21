@@ -1,4 +1,7 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:morse_code_flashlight/view/home_view.dart/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DecodeView extends StatefulWidget {
@@ -14,8 +17,8 @@ class _DecodeViewState extends State<DecodeView> {
   double appbarHeight = AppBar().preferredSize.height;
   bool darkTheme = false;
 
-  var inputMorse = '';
-
+  String inputMorse = '';
+  String output = '';
   @override
   void initState() {
     super.initState();
@@ -34,6 +37,7 @@ class _DecodeViewState extends State<DecodeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
+      drawer: _drawer(),
       body: Column(children: <Widget>[
         Expanded(flex: 1, child: _textOutput()),
         Expanded(flex: 1, child: _inputMorse()),
@@ -71,31 +75,65 @@ class _DecodeViewState extends State<DecodeView> {
     );
   }
 
-  Widget _textOutput() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: TextField(
-        keyboardType: TextInputType.multiline,
-        minLines: 20,
-        maxLines: null,
-        decoration: InputDecoration(
-          filled: true,
-          isDense: true,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
-          hintText: 'Enter Your Text Here',
-          hintStyle: const TextStyle(fontSize: 13),
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(width: 0.5),
-            borderRadius: BorderRadius.circular(3),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(width: 0.5),
-            borderRadius: BorderRadius.circular(3),
-          ),
+  Drawer _drawer() {
+    return Drawer(
+      child: SafeArea(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              color: Colors.red,
+            ),
+            ListTile(
+              title: const Text('Encode'),
+              onTap: () {
+                Navigator.popUntil(
+                    context, ModalRoute.withName(HomeView.route));
+              },
+            ),
+            ListTile(
+              title: const Text('Decode'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _textOutput() {
+    Widget text = Container(
+      margin: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          color: darkTheme ? Colors.grey[700] : Colors.grey[300],
+          borderRadius: BorderRadius.circular(5.0)),
+      //alignment: Alignment.topCenter,
+      padding: const EdgeInsets.all(8),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SelectableText(output),
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.copy),
+          onPressed: () => FlutterClipboard.copy(output)
+              .then((value) => Fluttertoast.showToast(
+                  msg: 'Text Copied',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  //backgroundColor: Colors.red,
+                  //textColor: Colors.white,
+                  fontSize: 16.0)),
+        )
+      ]),
+    );
+    return text;
   }
 
   Widget _inputMorse() {
@@ -173,7 +211,7 @@ class _DecodeViewState extends State<DecodeView> {
               elevation: 5.0,
               color: Colors.red,
               padding:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 11.0),
               onPressed: () {},
               child: const Text(
                 'Space',
