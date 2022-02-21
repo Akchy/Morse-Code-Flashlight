@@ -34,15 +34,15 @@ class _HomeViewState extends State<HomeView> {
       appBar: appBar(),
       body: Column(
         children: <Widget>[
-          _inputText(),
-          _flashLight(),
+          Expanded(flex: 1, child: _inputText()),
+          Expanded(flex: 1, child: _flashLight()),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         //backgroundColor: Colors.black,
         onPressed: () {},
         tooltip: 'SOS',
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -78,29 +78,26 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _inputText() {
-    return SizedBox(
-      height: (MediaQuery.of(context).size.height - appbarHeight) / 2,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: TextField(
-          keyboardType: TextInputType.multiline,
-          minLines: 10,
-          maxLines: null,
-          decoration: InputDecoration(
-            filled: true,
-            isDense: true,
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
-            hintText: 'Enter Your Text Here',
-            hintStyle: const TextStyle(fontSize: 13),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(width: 0.5),
-              borderRadius: BorderRadius.circular(3),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white, width: 0.5),
-              borderRadius: BorderRadius.circular(3),
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: TextField(
+        keyboardType: TextInputType.multiline,
+        minLines: 20,
+        maxLines: null,
+        decoration: InputDecoration(
+          filled: true,
+          isDense: true,
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+          hintText: 'Enter Your Text Here',
+          hintStyle: const TextStyle(fontSize: 13),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(width: 0.5),
+            borderRadius: BorderRadius.circular(3),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(width: 0.5),
+            borderRadius: BorderRadius.circular(3),
           ),
         ),
       ),
@@ -109,8 +106,10 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _flashLight() {
     return Container(
-      height: (MediaQuery.of(context).size.height - appbarHeight) / 2,
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      padding: const EdgeInsets.all(40),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:morse_code_flashlight/view/decode_view.dart/decode_view.dart';
 import 'package:morse_code_flashlight/view/home_view.dart/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +57,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: HomeView.route,
       routes: {
         HomeView.route: (context) => const HomeView(),
+        DecodeView.route: (context) => const DecodeView(),
       },
     );
   }
