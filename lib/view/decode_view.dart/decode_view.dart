@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:morse_code_flashlight/functions/morse_code.dart';
 import 'package:morse_code_flashlight/view/home_view.dart/home_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +17,7 @@ class _DecodeViewState extends State<DecodeView> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   double appbarHeight = AppBar().preferredSize.height;
   bool darkTheme = false;
+  String morse = '';
 
   String inputMorse = '';
   String output = '';
@@ -155,7 +157,7 @@ class _DecodeViewState extends State<DecodeView> {
                     ),
                     elevation: 5.0,
                     color: Colors.red,
-                    onPressed: () {},
+                    onPressed: () => setState(() => morse += '.'),
                     child: const Text(
                       '•',
                       style: TextStyle(fontSize: 25),
@@ -173,7 +175,7 @@ class _DecodeViewState extends State<DecodeView> {
                     ),
                     elevation: 5.0,
                     color: Colors.red,
-                    onPressed: () {},
+                    onPressed: () => setState(() => morse += '_'),
                     child: const Text(
                       '-',
                       style: TextStyle(fontSize: 25),
@@ -191,7 +193,12 @@ class _DecodeViewState extends State<DecodeView> {
                     ),
                     elevation: 5.0,
                     color: Colors.red,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (morse.isNotEmpty) {
+                        setState(
+                            () => morse = morse.substring(0, morse.length - 1));
+                      }
+                    },
                     child: const Icon(
                       Icons.backspace_outlined,
                       size: 20,
@@ -205,6 +212,16 @@ class _DecodeViewState extends State<DecodeView> {
             width: double.maxFinite,
             padding: const EdgeInsets.all(8),
             child: MaterialButton(
+              onPressed: () {
+                if (morse.isEmpty) {
+                  output += ' ';
+                } else {
+                  output = output + MorseCode().decode(morse) + ' ';
+                  setState(() {
+                    morse = '';
+                  });
+                }
+              },
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(3.0)),
               ),
@@ -212,7 +229,6 @@ class _DecodeViewState extends State<DecodeView> {
               color: Colors.red,
               padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 11.0),
-              onPressed: () {},
               child: const Text(
                 'Space',
                 style: TextStyle(fontSize: 20),
@@ -227,7 +243,7 @@ class _DecodeViewState extends State<DecodeView> {
             ),
           ),
           Text(
-            inputMorse,
+            morse,
             style: const TextStyle(fontSize: 15),
           )
         ],

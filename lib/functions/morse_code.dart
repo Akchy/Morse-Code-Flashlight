@@ -1,87 +1,128 @@
 class MorseCode {
-  String _characterGenerator(String charator) {
-    switch (charator) {
-      case '.-':
-        return 'A';
-      case '_...':
-        return 'B';
-      case '_._.':
-        return 'C';
-      case '_..':
-        return 'D';
-      case '.':
-        return 'E';
-      case '.._.':
-        return 'F';
-      case '__.':
-        return 'G';
-      case '....':
-        return 'H';
-      case '..':
-        return 'I';
-      case '.___':
-        return 'J';
-      case '_._':
-        return 'K';
-      case '._..':
-        return 'L';
-      case '__':
-        return 'M';
-      case '-.':
-        return 'N';
-      case '___':
-        return 'O';
-      case '.__.':
-        return 'P';
-      case '__._':
-        return 'Q';
-      case '.-.':
-        return 'R';
-      case '...':
-        return 'S';
-      case '-':
-        return 'T';
-      case '.._':
-        return 'U';
-      case '..._':
-        return 'V';
-      case '.__':
-        return 'W';
-      case '_.._':
-        return 'X';
-      case '_.__':
-        return 'Y';
-      case '__..':
-        return 'Z';
+  String _characterGenerator(String morse) {
+    String text = '';
+    switch (morse) {
       case '._._._':
-        return '.';
+        text = '.';
+        break;
       case '__..__':
-        return ',';
+        text = ',';
+        break;
       case '..__..':
-        return '?';
+        text = '?';
+        break;
       case '.____':
-        return '1';
+        text = '1';
+        break;
       case '..___':
-        return '2';
+        text = '2';
+        break;
       case '...__':
-        return '3';
+        text = '3';
+        break;
       case '...._':
-        return '4';
+        text = '4';
+        break;
       case '.....':
-        return '5';
+        text = '5';
+        break;
       case '_....':
-        return '6';
+        text = '6';
+        break;
       case '__...':
-        return '7';
+        text = '7';
+        break;
       case '___..':
-        return '8';
+        text = '8';
+        break;
       case '____.':
-        return '9';
+        text = '9';
+        break;
       case '_____':
-        return '0';
+        text = '0';
+        break;
+      case '_.._':
+        text = 'X';
+        break;
+      case '_.__':
+        text = 'Y';
+        break;
+      case '__..':
+        text = 'Z';
+        break;
+      case '..._':
+        text = 'V';
+        break;
+      case '.__.':
+        text = 'P';
+        break;
+      case '__._':
+        text = 'Q';
+        break;
+      case '._..':
+        text = 'L';
+        break;
+      case '.___':
+        text = 'J';
+        break;
+      case '....':
+        text = 'H';
+        break;
+      case '.._.':
+        text = 'F';
+        break;
+      case '_...':
+        text = 'B';
+        break;
+      case '_._.':
+        text = 'C';
+        break;
+      case '_..':
+        text = 'D';
+        break;
+      case '__.':
+        text = 'G';
+        break;
+      case '_._':
+        text = 'K';
+        break;
+      case '___':
+        text = 'O';
+        break;
+      case '._.':
+        text = 'R';
+        break;
+      case '...':
+        text = 'S';
+        break;
+      case '.._':
+        text = 'U';
+        break;
+      case '.__':
+        text = 'W';
+        break;
+      case '._':
+        text = 'A';
+        break;
+      case '..':
+        text = 'I';
+        break;
+      case '__':
+        text = 'M';
+        break;
+      case '_.':
+        text = 'N';
+        break;
+      case '.':
+        text = 'E';
+        break;
+      case '_':
+        text = 'T';
+        break;
       default:
-        return ' ';
+        text = ' ';
     }
+    return text;
   }
 
   String _morseCodeGenerator(String charator) {
@@ -213,11 +254,7 @@ class MorseCode {
   }
 
   String decode(String str) {
-    String morse = '';
-    str.split('').forEach((ch) {
-      morse = morse + _characterGenerator(ch) + ' ';
-    });
-    return morse;
+    return _characterGenerator(str) + ' ';
   }
 
   void modCodeFlasher(String mosCode) {

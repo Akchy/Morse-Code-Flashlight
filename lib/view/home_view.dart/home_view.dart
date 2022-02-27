@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:morse_code_flashlight/functions/mosCode.dart';
+import 'package:morse_code_flashlight/functions/morse_code.dart';
 import 'package:morse_code_flashlight/view/decode_view.dart/decode_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -146,9 +146,7 @@ class _HomeViewState extends State<HomeView> {
         cursor: SystemMouseCursors.click,
         child: InkWell(
           borderRadius: BorderRadius.circular(100),
-          onTap: () {
-            print(MorseCode().encode(inputText.text.toString()));
-          },
+          onTap: () => MorseCode().encode(inputText.text.toString()),
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(shape: BoxShape.circle),
