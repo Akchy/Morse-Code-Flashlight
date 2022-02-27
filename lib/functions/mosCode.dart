@@ -1,182 +1,179 @@
-import 'package:flutter/cupertino.dart';
-
-class MosCode {
-  String charatorGenerator(String charator) {
+class MorseCode {
+  String _characterGenerator(String charator) {
     switch (charator) {
-      case ".-":
-        return "A";
-      case "_...":
-        return "B";
-      case "_._.":
-        return "C";
-      case "_..":
-        return "D";
-      case ".":
-        return "E";
-      case ".._.":
-        return "F";
-      case "__.":
-        return "G";
-      case "....":
-        return "H";
-      case "..":
-        return "I";
-      case ".___":
-        return "J";
-      case "_._":
-        return "K";
-      case "._..":
-        return "L";
-      case "__":
-        return "M";
-      case "-.":
-        return "N";
-      case "___":
-        return "O";
-      case ".__.":
-        return "P";
-      case "__._":
-        return "Q";
-      case ".-.":
-        return "R";
-      case "...":
-        return "S";
-      case "-":
-        return "T";
-      case ".._":
-        return "U";
-      case "..._":
-        return "V";
-      case ".__":
-        return "W";
-      case "_.._":
-        return "X";
-      case "_.__":
-        return "Y";
-      case "__..":
-        return "Z";
-      case "._._._":
-        return ".";
-      case "__..__":
-        return ",";
-      case "..__..":
-        return "?";
-      case ".____":
-        return "1";
-      case "..___":
-        return "2";
-      case "...__":
-        return "3";
-      case "...._":
-        return "4";
-      case ".....":
-        return "5";
-      case "_....":
-        return "6";
-      case "__...":
-        return "7";
-      case "___..":
-        return "8";
-      case "____.":
-        return "9";
-      case "_____":
-        return "0";
+      case '.-':
+        return 'A';
+      case '_...':
+        return 'B';
+      case '_._.':
+        return 'C';
+      case '_..':
+        return 'D';
+      case '.':
+        return 'E';
+      case '.._.':
+        return 'F';
+      case '__.':
+        return 'G';
+      case '....':
+        return 'H';
+      case '..':
+        return 'I';
+      case '.___':
+        return 'J';
+      case '_._':
+        return 'K';
+      case '._..':
+        return 'L';
+      case '__':
+        return 'M';
+      case '-.':
+        return 'N';
+      case '___':
+        return 'O';
+      case '.__.':
+        return 'P';
+      case '__._':
+        return 'Q';
+      case '.-.':
+        return 'R';
+      case '...':
+        return 'S';
+      case '-':
+        return 'T';
+      case '.._':
+        return 'U';
+      case '..._':
+        return 'V';
+      case '.__':
+        return 'W';
+      case '_.._':
+        return 'X';
+      case '_.__':
+        return 'Y';
+      case '__..':
+        return 'Z';
+      case '._._._':
+        return '.';
+      case '__..__':
+        return ',';
+      case '..__..':
+        return '?';
+      case '.____':
+        return '1';
+      case '..___':
+        return '2';
+      case '...__':
+        return '3';
+      case '...._':
+        return '4';
+      case '.....':
+        return '5';
+      case '_....':
+        return '6';
+      case '__...':
+        return '7';
+      case '___..':
+        return '8';
+      case '____.':
+        return '9';
+      case '_____':
+        return '0';
       default:
-        return " ";
+        return ' ';
     }
-    return " ";
   }
 
-  String mosCodeGenerator(String charator) {
+  String _morseCodeGenerator(String charator) {
     charator = charator.toLowerCase();
-    String mosCode = "";
+    String morseCode = '';
     switch (charator) {
       case 'a':
-        mosCode = "._";
+        morseCode = '._';
         break;
       case 'b':
-        mosCode = "_...";
+        morseCode = '_...';
         break;
       case 'c':
-        mosCode = "_._.";
+        morseCode = '_._.';
         break;
       case 'd':
-        mosCode = "_..";
+        morseCode = '_..';
         break;
       case 'e':
-        mosCode = ".";
+        morseCode = '.';
         break;
       case 'f':
-        mosCode = ".._.";
+        morseCode = '.._.';
         break;
       case 'g':
-        mosCode = "__.";
+        morseCode = '__.';
         break;
       case 'h':
-        mosCode = "....";
+        morseCode = '....';
         break;
       case 'i':
-        mosCode = "..";
+        morseCode = '..';
         break;
       case 'j':
-        mosCode = ".___";
+        morseCode = '.___';
         break;
       case 'k':
-        mosCode = "_._";
+        morseCode = '_._';
         break;
       case 'l':
-        mosCode = "._..";
+        morseCode = '._..';
         break;
       case 'm':
-        mosCode = "__";
+        morseCode = '__';
         break;
       case 'n':
-        mosCode = "_.";
+        morseCode = '_.';
         break;
       case 'o':
-        mosCode = "___";
+        morseCode = '___';
         break;
       case 'p':
-        mosCode = ".__.";
+        morseCode = '.__.';
         break;
       case 'q':
-        mosCode = "__._";
+        morseCode = '__._';
         break;
       case 'r':
-        mosCode = "._.";
+        morseCode = '._.';
         break;
       case 's':
-        mosCode = "...";
+        morseCode = '...';
         break;
       case 't':
-        mosCode = "_";
+        morseCode = '_';
         break;
       case 'u':
-        mosCode = ".._";
+        morseCode = '.._';
         break;
       case 'v':
-        mosCode = "..._";
+        morseCode = '..._';
         break;
       case 'w':
-        mosCode = ".__";
+        morseCode = '.__';
         break;
       case 'x':
-        mosCode = "_.._";
+        morseCode = '_.._';
         break;
       case 'y':
-        mosCode = "_.__";
+        morseCode = '_.__';
         break;
       case 'z':
-        mosCode = "__..";
+        morseCode = '__..';
         break;
       case '.':
-        mosCode = "._._._";
+        morseCode = '._._._';
         break;
       case ',':
-        mosCode = "__..__";
+        morseCode = '__..__';
         break;
       case '?':
-        mosCode = "..__..";
+        morseCode = '..__..';
         break;
       default:
         {
@@ -184,36 +181,52 @@ class MosCode {
             if (charator.codeUnitAt(0) - 48 < 6) {
               int i;
               for (i = 0; i < charator.codeUnitAt(0) - 48; i++) {
-                mosCode = mosCode + ".";
+                morseCode = morseCode + '.';
               }
               for (; i < 5; i++) {
-                mosCode = mosCode + "_";
+                morseCode = morseCode + '_';
               }
             } else {
               int i;
               for (i = 5; i < charator.codeUnitAt(0) - 48; i++) {
-                mosCode = mosCode + "_";
+                morseCode = morseCode + '_';
               }
               for (; i < 10; i++) {
-                mosCode = mosCode + ".";
+                morseCode = morseCode + '.';
               }
             }
           } else {
-            mosCode = " ";
+            morseCode = ' ';
           }
         }
         break;
     }
-    return mosCode;
+    return morseCode;
+  }
+
+  String encode(String str) {
+    String morse = '';
+    str.split('').forEach((ch) {
+      morse = morse + _morseCodeGenerator(ch) + ' ';
+    });
+    return morse;
+  }
+
+  String decode(String str) {
+    String morse = '';
+    str.split('').forEach((ch) {
+      morse = morse + _characterGenerator(ch) + ' ';
+    });
+    return morse;
   }
 
   void modCodeFlasher(String mosCode) {
     String charator;
     for (int i = 0; i < mosCode.length; i++) {
       charator = mosCode.substring(i, i + 1);
-      if (charator == ".") {
+      if (charator == '.') {
       } else if (charator == '_') {
-      } else if (charator == " ") {}
+      } else if (charator == ' ') {}
     }
   }
 }

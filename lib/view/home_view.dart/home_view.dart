@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:morse_code_flashlight/functions/mosCode.dart';
 import 'package:morse_code_flashlight/view/decode_view.dart/decode_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ class _HomeViewState extends State<HomeView> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   double appbarHeight = AppBar().preferredSize.height;
   bool darkTheme = false;
+  final inputText = TextEditingController();
 
   @override
   void initState() {
@@ -27,6 +29,13 @@ class _HomeViewState extends State<HomeView> {
     setState(() {
       darkTheme = prefs.getBool('darkTheme') ?? false;
     });
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    inputText.dispose();
+    super.dispose();
   }
 
   @override
@@ -104,6 +113,7 @@ class _HomeViewState extends State<HomeView> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: TextField(
+        controller: inputText,
         keyboardType: TextInputType.multiline,
         minLines: 20,
         maxLines: null,
@@ -136,7 +146,9 @@ class _HomeViewState extends State<HomeView> {
         cursor: SystemMouseCursors.click,
         child: InkWell(
           borderRadius: BorderRadius.circular(100),
-          onTap: () {},
+          onTap: () {
+            print(MorseCode().encode(inputText.text.toString()));
+          },
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(shape: BoxShape.circle),
