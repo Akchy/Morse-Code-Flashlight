@@ -294,6 +294,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.8"
+  torch_light:
+    dependency: "direct main"
+    description:
+      name: torch_light
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   typed_data:
     dependency: transitive
     description:

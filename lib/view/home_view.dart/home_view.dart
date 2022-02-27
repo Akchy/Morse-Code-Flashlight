@@ -1,7 +1,12 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:morse_code_flashlight/functions/morse_code.dart';
 import 'package:morse_code_flashlight/view/decode_view.dart/decode_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:torch_light/torch_light.dart';
 
 class HomeView extends StatefulWidget {
   static const String route = '/';
@@ -16,6 +21,10 @@ class _HomeViewState extends State<HomeView> {
   double appbarHeight = AppBar().preferredSize.height;
   bool darkTheme = false;
   final inputText = TextEditingController();
+  String morse = '';
+  int dotTime = 200;
+  int dashTime = 1000;
+  int spaceTime = 500;
 
   @override
   void initState() {
@@ -146,7 +155,24 @@ class _HomeViewState extends State<HomeView> {
         cursor: SystemMouseCursors.click,
         child: InkWell(
           borderRadius: BorderRadius.circular(100),
-          onTap: () => MorseCode().encode(inputText.text.toString()),
+          onTap: () async {
+            if (inputText.text.isNotEmpty) {
+              try {
+                await TorchLight.isTorchAvailable();
+                morse = MorseCode().encode(inputText.text.toString());
+                flashlight(morse);
+              } on Exception catch (_) {
+                Fluttertoast.showToast(
+                    msg: 'Flashlight Not Found',
+                    toastLength: Toast.LENGTH_LONG,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    //backgroundColor: Colors.red,
+                    //textColor: Colors.white,
+                    fontSize: 16.0);
+              }
+            }
+          },
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(shape: BoxShape.circle),
@@ -158,5 +184,24 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
     );
+  }
+
+  void flashlight(var morse) {
+    morse.split('').forEach((m) {
+      if (m == '.') {
+        TorchLight.enableTorch();
+        sleep(Duration(milliseconds: dotTime));
+        TorchLight.disableTorch();
+        sleep(Duration(milliseconds: spaceTime));
+      } else if (m == '_') {
+        TorchLight.enableTorch();
+        sleep(Duration(milliseconds: dashTime));
+        TorchLight.disableTorch();
+        sleep(Duration(milliseconds: spaceTime));
+      } else {
+        sleep(Duration(milliseconds: 3 * spaceTime));
+        TorchLight.disableTorch();
+      }
+    });
   }
 }

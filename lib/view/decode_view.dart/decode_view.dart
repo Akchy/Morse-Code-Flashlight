@@ -244,7 +244,7 @@ class _DecodeViewState extends State<DecodeView> {
           ),
           Text(
             morse,
-            style: const TextStyle(fontSize: 15),
+            style: const TextStyle(fontSize: 35),
           )
         ],
       ),
