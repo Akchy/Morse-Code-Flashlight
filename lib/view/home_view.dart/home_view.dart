@@ -58,12 +58,6 @@ class _HomeViewState extends State<HomeView> {
           Expanded(flex: 1, child: _flashLight()),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        //backgroundColor: Colors.black,
-        onPressed: () {},
-        tooltip: 'SOS',
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
@@ -167,8 +161,6 @@ class _HomeViewState extends State<HomeView> {
                     toastLength: Toast.LENGTH_LONG,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,
-                    //backgroundColor: Colors.red,
-                    //textColor: Colors.white,
                     fontSize: 16.0);
               }
             }
